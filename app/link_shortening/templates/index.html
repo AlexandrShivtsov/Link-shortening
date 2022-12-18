@@ -1,23 +1,41 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'link_shortening/css/index.css' %}">
+    <title>Make your link short</title>
 </head>
-
     <body>
-        <h1>Hello </h1>
-            <form method="POST" style="C">
-                {% csrf_token %}
-<!--                <div style="border-radius: 30px;">-->
-<!--                    Link <input type="text" name="long_link" style="border-radius: 30px; border-radius: 30px;"><br>-->
-<!--                </div>-->
+        <!--HEADER-->
+        <header class="header">
+            <div class="container">
+                <h1>Link shortening service</h1>
+            </div>
+        </header>
+        <main>
+            <div class="content">
 
-<!--                Time to delete <input type="text" name="time_to_delete">-->
-                {{ form.as_p }}
-                <input type="submit" value="Створити">
-            </form>
+                <form method="POST" >
+                    {% csrf_token %}
+                    <div class="fields">
+                        <h2 class="fields_label">Enter link for shortening</h2>  
+                        {{ form.long_link }}
+                        <h2 class="fields_label">Days to delete link</h2>
+                        {{ form.time_to_delete }}
+                    </div>
+
+                    <input type="submit" value="Створити" class="button">
+
+                </form>
+
+            </div>
+        </main>
     </body>
-
 </html>
+
+
 
