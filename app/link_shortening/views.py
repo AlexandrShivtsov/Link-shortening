@@ -17,7 +17,7 @@ def index(request):
         will_delete = timezone.now() + timezone.timedelta(int(time_to_delete))  # вираховуємо дату видалення посилання
 
         if Links.objects.filter(long_link=long_link).exists():
-            """Якщо посилання існаує, беремо скоречене посилання з бази данних та віддіємо користувачу"""
+            """Якщо посилання існаує, беремо скоречене посилання з бази данних та віддаємо користувачу"""
 
             instance_link = Links.objects.get(long_link=long_link)
             short_link = instance_link.short_link
@@ -52,7 +52,12 @@ def redirect_to_original_url(request, **kwargs):
     unique_token = kwargs.pop('unique_token')
     """отримує unique_token за допомогою якого занаходить оригінальне 
     посилання та перенаправляю на нього користувача"""
+    link_object = Links.objects.get(unique_token=unique_token)
 
-    original_url = Links.objects.get(unique_token=unique_token).long_link
+    original_url = link_object.long_link # отримуємо оригінальне посилання
+
+    counter = link_object.amount + 1 # збільшуємо лічильник
+    link_object.amount=counter # присвоюємо полю amount нове значення
+    link_object.save(update_fields=['amount']) # зберігаємо оновлене поле amount
 
     return HttpResponseRedirect(original_url)

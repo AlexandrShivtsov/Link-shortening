@@ -10,6 +10,7 @@ class LinksAdmin(admin.ModelAdmin):
                     'created',
                     'short_link',
                     'unique_token',
+                    'amount',
                     )
 
 
