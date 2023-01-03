@@ -9,7 +9,9 @@ class Links(models.Model):
     short_link = models.URLField(max_length=30, verbose_name='Short link')
     unique_token = models.CharField(max_length=5, verbose_name='Unique token')
     created = models.DateField(auto_now_add=True)
+    amount = models.IntegerField(verbose_name='amount of visiting link', default=0)
 
     class Meta:
         verbose_name = 'Link'
         verbose_name_plural = 'Links'
+
