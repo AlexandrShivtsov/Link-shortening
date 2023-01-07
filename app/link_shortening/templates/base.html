@@ -8,11 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'link_shortening/css/index.css' %}">
+    
     <title>{% block title %}{% endblock %}</title>
 </head>
     <body>
       {% block main_content %}
 
+
       {% endblock  %} 
+      <script type="text/javascript" src="{% static 'link_shortening/js/jquery.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'link_shortening/js/ajax_jqery.js' %}"></script>
     </body>
 </html>

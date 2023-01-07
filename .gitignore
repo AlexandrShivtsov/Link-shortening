@@ -130,3 +130,5 @@ dmypy.json
 
 .key.py
 key.py
+
+.vscode/

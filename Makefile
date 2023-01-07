@@ -21,3 +21,4 @@ makemigrations:
 migrate:
 	$(manage_py) migrate
     	
+# sudo /etc/init.d/redis-server start

@@ -31,7 +31,7 @@ body{
 
 /* MAIN PART */
 
-.content{
+.content, h4, h1{
     margin: 0;
     position: absolute;
     top: 35%;
