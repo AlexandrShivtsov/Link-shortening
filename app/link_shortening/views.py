@@ -1,9 +1,10 @@
 from django.shortcuts import HttpResponseRedirect, render
 from django.utils import timezone
+from django.http import HttpResponse
 
 from link_shortening.forms import LinksForm
 from link_shortening.models import Links
-from link_shortening.tasks import make_unique_token, make_url
+from link_shortening.services import make_unique_token, make_url
 
 
 def index(request):
@@ -30,7 +31,8 @@ def index(request):
                 instance_link.time_to_delete = will_delete
                 instance_link.save(update_fields=['time_to_delete'])
 
-            return render(request, template_name='short_link.html', context={'short_link': short_link})
+            # return render(request, template_name='short_link.html', context={'short_link': short_link})
+            return HttpResponse('This is your link: ' + short_link)
 
         else:
             unique_token = make_unique_token()
@@ -43,7 +45,8 @@ def index(request):
                 time_to_delete=will_delete,
             )
 
-            return render(request, template_name='short_link.html', context={'short_link': url})
+            # return render(request, template_name='short_link.html', context={'short_link': url})
+            return HttpResponse('This is your link: ' + url)
 
     return render(request, template_name='index.html', context={'form': long_link_form})
 

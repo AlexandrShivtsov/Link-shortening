@@ -10,8 +10,7 @@
         </header>
         <main>
             <div class="content">
-
-                <form method="POST" >
+                <form method="POST" id="create-link-form">
                     {% csrf_token %}
                     <div class="fields">
                         <h2 class="fields_label">Enter link for shortening</h2>  
@@ -23,11 +22,12 @@
                     <input type="submit" value="Створити" class="button">
 
                 </form>
-
             </div>
         </main>
+       
+        <h4 id="success"></h4>
+        
+       
 {% endblock  %} 
-
-
 
 

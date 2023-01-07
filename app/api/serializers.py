@@ -1,7 +1,7 @@
 from django.utils import timezone
 
 from link_shortening.models import Links
-from link_shortening.tasks import make_unique_token, make_url
+from link_shortening.services import make_unique_token, make_url
 
 from rest_framework import serializers
 
