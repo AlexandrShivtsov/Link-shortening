@@ -8,8 +8,8 @@ body{
 .container{
     padding-top: 10px;
     padding-bottom: 10px;
-    width: 1494px;
-    height: 80px;
+    max-width: 1494px;
+    max-height: 80px;
     margin: 0 auto;
 }
 
@@ -20,7 +20,7 @@ body{
     background-color: rgb(8, 8, 8);
 }
 
-.header h1, .header h2{
+.header h1, .header h4{
     text-align: center;
     color: whitesmoke;
 }
@@ -31,7 +31,7 @@ body{
 
 /* MAIN PART */
 
-.content, h4, h1{
+.content{
     margin: 0;
     position: absolute;
     top: 35%;
@@ -42,8 +42,8 @@ body{
 
 .link_field{
     border: 2px solid rgb(87, 88, 84);
-    width: 500px;
-    height: 30px;
+    max-width: 500px;
+    max-height: 30px;
     border-radius: 10px;
     padding-top: 5px;
     font-size: 18px;
@@ -77,4 +77,12 @@ body{
     font-size: 16px;
     border-radius: 10px;
 }
+
+.link_ready{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    color: rgb(212, 20, 20);
+}
+
 

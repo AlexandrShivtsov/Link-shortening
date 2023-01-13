@@ -17,7 +17,7 @@ from django.urls import path
 
 from link_shortening.views import index, redirect_to_original_url
 
-app_name = ''
+app_name = 'lsh'
 
 urlpatterns = [
     path('index/', index, name='index'),
