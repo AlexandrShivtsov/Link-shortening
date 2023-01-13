@@ -8,7 +8,7 @@ class LinksForm(forms.ModelForm):
                                                             "id": "link",
                                                             "placeholder": "URL"}))
     
-    time_to_delete = forms.IntegerField(min_value=1, max_value=365, widget=forms.TextInput(
+    time_to_delete = forms.IntegerField(min_value=1, max_value=365, initial=30, widget=forms.TextInput(
                                                                     attrs={"class": "timt_to_delete_fild", 
                                                                            "id": "delete",
                                                                            "placeholder": "30"}))
