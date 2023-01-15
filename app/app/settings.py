@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 from app.key import KEY
+from app import config
 
 from celery.schedules import crontab
 
@@ -84,31 +85,13 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = config.DATABASES
 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+AUTH_PASSWORD_VALIDATORS = config.AUTH_PASSWORD_VALIDATORS
 
 
 # Internationalization
@@ -134,37 +117,18 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = config.DEFAULT_AUTO_FIELD
 
-HTTP_SCHEMA = 'http://'
-DOMAIN = 'localhost:'
-PORT = '8000'
+HTTP_SCHEMA = config.HTTP_SCHEMA
+DOMAIN = config.DOMAIN
+PORT = config.PORT
 
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
+REST_FRAMEWORK = config.REST_FRAMEWORK
 
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework.authentication.TokenAuthentication',
-    # ),
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAdminUser',
-    # ),
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
-}
+CELERY_BROKER_URL = config.CELERY_BROKER_URL
+CELERY_RESULT_BACKEND = config.CELERY_RESULT_BACKEND
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+INTERNAL_IPS = config.INTERNAL_IPS
 
 
-CELERY_BEAT_SCHEDULE = {
-    'delete_depricated_links':
-    {
-        'task': 'link_shortening.tasks.delete_depricated_links',
-        'schedule': crontab(minute=0, hour=0)
-    },
-}
+CELERY_BEAT_SCHEDULE = config.CELERY_BEAT_SCHEDULE

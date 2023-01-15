@@ -29,7 +29,8 @@ def make_url(unique_token: str) -> str:
     return url
 
 
-def chek_existing_short_link(long_link: str) -> bool:
+def chek_existing_long_link(long_link: str) -> bool:
+    """Перевіяє чи не існує в базі данних URL, який необхідно скоротити"""
     if Links.objects.filter(long_link=long_link).exists():
         return True
 
@@ -42,26 +43,27 @@ def return_existing_short_link(long_link: str) -> str:
 
 
 def chek_time_to_delete_short_link(long_link: str, will_delete: str):
+    """Якщо час до видалення у новому запиті більший ніж у існуючому, 
+    оновлюємо час до видалення на пізніший термін"""
     instance_link = Links.objects.get(long_link=long_link)
     previous_time_to_delete = instance_link.time_to_delete
     if will_delete > previous_time_to_delete:
-        """Якщо час до видалення у новому запиті більший ніж у існуючому, 
-        оновлюємо час до видалення на пізніший термін"""
-
         instance_link.time_to_delete = will_delete
         instance_link.save(update_fields=['time_to_delete'])
 
 
 def save_to_db_new_link(long_link, url, unique_token, will_delete):
-      Links.objects.create(
-                long_link=long_link,
-                short_link=url,
-                unique_token=unique_token,
-                time_to_delete=will_delete,
-            )
+    """зберігає у db оригінальне посилання, скорочене посилання, токен та дату коли посилання буде видалене"""
+    Links.objects.create(
+            long_link=long_link,
+            short_link=url,
+            unique_token=unique_token,
+            time_to_delete=will_delete,
+        )
 
 
 def link_click_counter(unique_token: str) -> str:
+    """рахує кількість переходів за скороченим посиланням"""
     link_object = Links.objects.get(unique_token=unique_token)
     original_url = link_object.long_link # отримуємо оригінальне посилання
     counter = link_object.amount + 1 # збільшуємо лічильник

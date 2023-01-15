@@ -131,4 +131,7 @@ dmypy.json
 .key.py
 key.py
 
+.config.py
+config.py
+
 .vscode/
